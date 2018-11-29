@@ -83,6 +83,7 @@ def backward_pass(dA,cache,activation):
             assert(dZ.shape==Z.shape)
             
             A_prev,W,b=linear_cache
+            m = A_prev.shape[1]
             
             dW= (1/m)*np.dot(dZ,A_prev.T)
             db = (1/m)*np.sum(dZ,axis=1,keepdims=True)
@@ -100,6 +101,7 @@ def backward_pass(dA,cache,activation):
             assert(dZ.shape==Z.shape)
             
             A_prev,W,b=linear_cache
+            m = A_prev.shape[1]
             
             dW = (1/m)*np.dot(dZ,A_prev.T)
             db=(1/m)*np.sum(dZ,axis=1,keepdims=True)
@@ -135,12 +137,12 @@ def update_parameters(parameters,grads,learning_rate):
         
     return parameters
 
-def predict(X,parameters):
+def predict(X,y,parameters):
     
     m = X.shape[1]
     p=np.zeros((1,m))
     
-    probas,caches=L_model_forward(X,parameters)
+    probas,caches = L_model_forward(X,parameters)
     
     for l in range(0,probas.shape[1]):
         
@@ -149,6 +151,8 @@ def predict(X,parameters):
             
         else:
             p[0,l]=0
+            
+    print("Accuracy: "  + str(np.sum((p == y)/m)))
             
     return p
 
