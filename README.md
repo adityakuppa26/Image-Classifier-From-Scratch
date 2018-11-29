@@ -1,2 +1,2 @@
 # Image-Classifier-From-Scratch
-Implements image classifier using neural-nets
+Cat vs Non-Cat image classifier using neural-net coded from scratch.
